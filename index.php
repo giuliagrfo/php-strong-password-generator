@@ -1,21 +1,11 @@
 <?php
 
 // Creare un form che invii in GET la lunghezza della password. Una nostra funzione utilizzerà questo dato per generare una password casuale (composta da lettere, lettere maiuscole, numeri emboli) da restituire all’utente
+require __DIR__ . '/functions.php';
 
 if (isset($_GET['number'])) {
-    function generatePassword($length)
-    {
-        $pwChar = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,;:!?.$/*-+&@_+";
-        $password = '';
-
-        for ($i = 0; $i < $length; $i++) {
-            $random = rand(0, strlen($pwChar) - 1);
-            $password .= substr($pwChar, $random, 1);
-        }
-
-        return $password;
-    }
-
+    // function
+    $active = 'active'; // add class to the banner
     $pw = generatePassword($_GET['number']);
 }
 ?>
@@ -28,6 +18,15 @@ if (isset($_GET['number'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <style>
+        .banner {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+    </style>
     <title>Password Generator</title>
 </head>
 
@@ -38,7 +37,7 @@ if (isset($_GET['number'])) {
     </header>
     <main>
         <div class="container">
-            <div class="bg-secondary text-white text-center p-5 my-3 rounded">
+            <div class="bg-secondary text-white text-center p-5 my-3 rounded banner <?php echo $active ?> ">
                 <h6>La tua password: <?php echo $pw ?></h6>
             </div>
 
