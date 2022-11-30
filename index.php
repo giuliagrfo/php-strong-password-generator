@@ -7,6 +7,7 @@ if (isset($_GET['number'])) {
     // function
     $active = 'active'; // add class to the banner
     $pw = generatePassword($_GET['number']);
+} else {
 }
 ?>
 
@@ -38,7 +39,11 @@ if (isset($_GET['number'])) {
     <main>
         <div class="container">
             <div class="bg-secondary text-white text-center p-5 my-3 rounded banner <?php echo $active ?> ">
-                <h6>La tua password: <?php echo $pw ?></h6>
+                <?php if (empty($_GET['number'])) : ?>
+                    <h6 class="text-warning"><strong>Inserisci un valore!</strong></h6>
+                <?php else : ?>
+                    <h6 class="text-dark">La tua password: <span class="text-white"><?php echo $pw ?></span></h6>
+                <?php endif ?>
             </div>
 
         </div>
